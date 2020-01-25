@@ -44,13 +44,86 @@ var myQuestions = [
 
 ];
 
+var quizcontainer = document.getElementById('quiz')
+var scorecontainer = document.getElementById('submit')
+var submitbutton = document.getElementById('results')
+generateQuiz(myQuestions, quizcontainer, scorecontainer, submitbutton);
 
 
+document.getElementById("start").addEventListener("click", function );
 
-function Quiz(myQuestions); {
-    this.score = 0
-    this.questions = questions;
-    this.questionIndex = 0;
+function generateQuiz(myQuestions, quizcontainer, scorecontainer, submitbutton) {
+
+    function showQuestions(myQuestions, quizContainer) {
+
+        var output = [];
+        var answers;
+
+
+        for (var i = 0; i < myQuestions.length; i++) {
+
+            answers = [];
+
+            for (letter in myQuestions[i].answers) {
+
+
+                answers.push(
+                    '<label>'
+                    + '<input type="radio" name="question' + i + '" value="' + letter + '">'
+                    + letter + ': '
+                    + myQuestions[i].answers[letter]
+                    + '</label>'
+                );
+            }
+
+
+            output.push(
+                '<div class="question">' + myQuestions[i].question + '</div>'
+                + '<div class="answers">' + answers.join('') + '</div>'
+            );
+        }
+
+        quizcontainer.innerHTML = output.join('');
+    }
+
+
+    function showResults(myQuestions, quizcontainer, scorecontainer) {
+
+        var answerContainers = quizcontainer.querySelectorAll('.answers');
+
+        var userAnswer = '';
+        var numCorrect = 0;
+
+
+        for (var i = 0; i < myQuestions.length; i++) {
+
+            userAnswer = (scorecontainers[i].querySelector('input[name=question' + i + ']:checked') || {}).value;
+
+            if (userAnswer === myQuestions[i].correctAnswer) {
+
+                numCorrect++;
+
+                answerContainers[i].style.color = 'green';
+            }
+            else {
+
+                answerContainers[i].style.color = 'red';
+            }
+        }
+
+        scorecontainer.innerHTML = numCorrect + ' out of ' + myQuestions.length;
+    }
+
+
+    showQuestions(myQuestions, quizcontainer);
+
+
+    submitbutton.onclick = function () {
+        showResults(myQuestions, quizcontainer, scorecontainer);
+    }
+
 }
+
+
 
 
