@@ -50,7 +50,7 @@ var submitbutton = document.getElementById('results')
 generateQuiz(myQuestions, quizcontainer, scorecontainer, submitbutton);
 
 
-document.getElementById("start").addEventListener("click", function );
+// document.getElementById("start").addEventListener("click", function );
 
 function generateQuiz(myQuestions, quizcontainer, scorecontainer, submitbutton) {
 
